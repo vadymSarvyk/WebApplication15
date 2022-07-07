@@ -10,16 +10,19 @@ namespace WebApplication15.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public string Name { get; set; }
+        public int? Age { get; set; }
+        public bool IsCorrect { get; set; } = true;
+        public void OnGet(string name, int? age)
         {
-            _logger = logger;
+            if (age == null || age < 1 || age > 110 || string.IsNullOrEmpty(name))
+            {
+                IsCorrect = false;
+                return;
+            }
+            Age = age;
+            Name = name;
         }
 
-        public void OnGet()
-        {
-
-        }
     }
 }
